@@ -99,7 +99,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
         <div className="p-4 border-t border-slate-100">
           <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50/50">
-            <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold border border-indigo-200">
+            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold border border-primary/20">
               F
             </div>
             <div className="flex-1 overflow-hidden">

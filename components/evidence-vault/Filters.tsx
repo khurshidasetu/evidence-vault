@@ -57,7 +57,7 @@ export default function Filters({
           value={selectedType}
           onValueChange={(val) => onFilterChange({ type: val })}
         >
-          <SelectTrigger className="h-10 bg-slate-50 border-slate-200 focus:ring-primary/20">
+          <SelectTrigger className="h-10 w-full bg-slate-50 border-slate-200 focus:ring-primary/20">
             <SelectValue placeholder="All" />
           </SelectTrigger>
           <SelectContent>
@@ -79,7 +79,7 @@ export default function Filters({
           value={selectedStatus}
           onValueChange={(val) => onFilterChange({ status: val })}
         >
-          <SelectTrigger className="h-10 bg-slate-50 border-slate-200 focus:ring-primary/20">
+          <SelectTrigger className="h-10 w-full bg-slate-50 border-slate-200 focus:ring-primary/20">
             <SelectValue placeholder="All" />
           </SelectTrigger>
           <SelectContent>
@@ -101,7 +101,7 @@ export default function Filters({
           value={selectedExpiry}
           onValueChange={(val) => onFilterChange({ expiry: val })}
         >
-          <SelectTrigger className="h-10 bg-slate-50 border-slate-200 focus:ring-primary/20">
+          <SelectTrigger className="h-10 w-full bg-slate-50 border-slate-200 focus:ring-primary/20">
             <SelectValue placeholder="All" />
           </SelectTrigger>
           <SelectContent>
