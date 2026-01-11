@@ -2,13 +2,13 @@ import React from "react";
 import { Info } from "lucide-react";
 import { Evidence } from "@/lib/data";
 
-interface MetadataCardProps {
+interface MetadataProps {
   evidence: Evidence;
 }
 
-export const MetadataCard: React.FC<MetadataCardProps> = ({ evidence }) => {
+export default function Metadata({ evidence }: MetadataProps) {
   return (
-    <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+    <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6 ">
       <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
         <Info size={16} className="text-primary" />
         Metadata
@@ -41,4 +41,4 @@ export const MetadataCard: React.FC<MetadataCardProps> = ({ evidence }) => {
       </div>
     </div>
   );
-};
+}

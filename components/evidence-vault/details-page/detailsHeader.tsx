@@ -1,21 +1,21 @@
 "use client";
 
 import React from "react";
-import { ArrowLeft, Clock, Calendar, FileText, Upload } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, Upload } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { StatusChip } from "@/components/ui/StatusChip";
 import { Button } from "@/components/ui/button";
 import { Evidence } from "@/lib/data";
 
-interface EvidenceHeaderProps {
+interface DetailsHeaderProps {
   evidence: Evidence;
   onUploadClick: () => void;
 }
 
-export const EvidenceHeader: React.FC<EvidenceHeaderProps> = ({
+export default function DetailsHeader({
   evidence,
   onUploadClick,
-}) => {
+}: DetailsHeaderProps) {
   const router = useRouter();
 
   return (
@@ -31,10 +31,6 @@ export const EvidenceHeader: React.FC<EvidenceHeaderProps> = ({
       </button>
 
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 bg-white p-8 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden">
-        <div className="absolute top-0 right-0 p-8 opacity-5">
-          <FileText size={120} />
-        </div>
-
         <div className="space-y-4 relative z-10">
           <div className="flex items-center gap-3">
             <StatusChip
@@ -71,7 +67,7 @@ export const EvidenceHeader: React.FC<EvidenceHeaderProps> = ({
 
         <Button
           onClick={onUploadClick}
-          className="h-12 px-6 bg-primary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 hover:bg-primary/90 transition-all transform hover:-translate-y-0.5 flex gap-2"
+          className=" px-6 bg-primary text-white font-bold shadow-xl shadow-primary/20 hover:bg-primary/90 transition-all transform hover:-translate-y-0.5 flex gap-2"
         >
           <Upload size={20} />
           <span>Upload New Version</span>
@@ -79,4 +75,4 @@ export const EvidenceHeader: React.FC<EvidenceHeaderProps> = ({
       </div>
     </div>
   );
-};
+}

@@ -12,6 +12,7 @@ export interface EvidenceVersion {
   uploader: string;
   notes: string;
   fileSize: string;
+  fileName?: string;
 }
 
 export interface Evidence {
@@ -59,6 +60,7 @@ export const MOCK_EVIDENCE: Evidence[] = [
         uploader: "John Doe",
         notes: "Updated for new year renewal",
         fileSize: "2.4 MB",
+        fileName: "factory_license_2024.pdf",
       },
       {
         version: "v1",
@@ -66,6 +68,7 @@ export const MOCK_EVIDENCE: Evidence[] = [
         uploader: "Jane Smith",
         notes: "Initial upload",
         fileSize: "2.1 MB",
+        fileName: "factory_license_old.pdf",
       },
     ],
   },

@@ -37,7 +37,7 @@ const NavItem: React.FC<NavItemProps> = ({ href, icon, label }) => {
       className={cn(
         "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group",
         isActive
-          ? "bg-primary text-white shadow-lg shadow-primary/20"
+          ? "bg-primary/20 shadow-sm "
           : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
       )}
     >

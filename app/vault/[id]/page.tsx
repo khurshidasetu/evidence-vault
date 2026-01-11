@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { Evidence, EvidenceVersion, MOCK_EVIDENCE } from "@/lib/data";
 import { useParams } from "next/navigation";
-import { MOCK_EVIDENCE, Evidence, EvidenceVersion } from "@/lib/data";
-import { EvidenceHeader } from "@/components/vault/EvidenceHeader";
-import { MetadataCard } from "@/components/vault/MetadataCard";
-import { VersionHistoryTable } from "@/components/vault/VersionHistoryTable";
-import { UploadVersionModal } from "@/components/vault/UploadVersionModal";
+import { useEffect, useState } from "react";
+
+import BusinessLicense from "@/components/evidence-vault/details-page/businessLicense";
+import DetailsHeader from "@/components/evidence-vault/details-page/detailsHeader";
+import Metadata from "@/components/evidence-vault/details-page/metadata";
+import Txs from "@/components/evidence-vault/details-page/txs";
+import UploadNewVersion from "@/components/evidence-vault/details-page/uploadnewversion";
+import VersionHistory from "@/components/evidence-vault/details-page/versionhistory";
 
 export default function EvidenceDetailPage() {
   const { id } = useParams();
@@ -40,23 +43,25 @@ export default function EvidenceDetailPage() {
   };
 
   return (
-    <div className="space-y-8 pb-12 animate-in fade-in duration-500">
-      <EvidenceHeader
+    <div className="space-y-6 pb-12 animate-in fade-in duration-500">
+      <DetailsHeader
         evidence={evidence}
         onUploadClick={() => setIsModalOpen(true)}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-1">
-          <MetadataCard evidence={evidence} />
+        <div className="lg:col-span-1 space-y-6">
+          <Metadata evidence={evidence} />
+          {evidence.type === "Business License" && <BusinessLicense />}
+          <Txs />
         </div>
 
         <div className="lg:col-span-2">
-          <VersionHistoryTable history={evidence.history} />
+          <VersionHistory history={evidence.history} />
         </div>
       </div>
 
-      <UploadVersionModal
+      <UploadNewVersion
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onUpload={handleUpload}
