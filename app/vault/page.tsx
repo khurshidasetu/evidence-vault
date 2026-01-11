@@ -1,24 +1,30 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import {
-  Plus,
-  Filter,
-  Download,
-  Trash2,
-  ArrowRight,
-  Table as TableIcon,
-  LayoutGrid,
-} from "lucide-react";
-import { MOCK_EVIDENCE, DocType, DocStatus, Evidence } from "@/lib/data";
-import { Table } from "@/components/ui/Table";
 import { StatusChip } from "@/components/ui/StatusChip";
+import { Table } from "@/components/ui/Table";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { DocStatus, DocType, Evidence, MOCK_EVIDENCE } from "@/lib/data";
+import { ArrowRight, Plus, Search } from "lucide-react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useMemo, useState } from "react";
 
 function VaultContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Filters from URL
   const selectedType = searchParams.get("type") || "All";
@@ -115,13 +121,21 @@ function VaultContent() {
       accessor: (item: Evidence) => (
         <Link
           href={`/vault/${item.id}`}
-          className="p-2 hover:bg-indigo-50 text-indigo-600 rounded-lg transition-colors inline-block"
+          className="p-2 hover:bg-primary/10 text-primary rounded-lg transition-colors inline-block"
         >
           <ArrowRight size={18} />
         </Link>
       ),
     },
   ];
+
+  if (!mounted) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -136,79 +150,104 @@ function VaultContent() {
         </div>
         <div className="flex items-center gap-3">
           {selectedIds.length > 0 && (
-            <button className="flex items-center gap-2 px-4 py-2.5 bg-indigo-50 text-indigo-700 font-semibold rounded-xl border border-indigo-100 animate-in slide-in-from-right-4">
+            <Button
+              variant="outline"
+              className="text-primary font-bold border-primary/20 bg-primary/5 animate-in slide-in-from-right-4 transition-all flex gap-2"
+            >
               <span>Add to Pack</span>
-              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-indigo-600 text-white text-[10px]">
+              <span className="flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full bg-primary text-white text-[10px]">
                 {selectedIds.length}
               </span>
-            </button>
+            </Button>
           )}
-          <button className="flex items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white font-semibold rounded-xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all">
+          <Button className="font-bold bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:bg-primary/90 flex gap-2">
             <Plus size={18} />
             <span>Upload Document</span>
-          </button>
+          </Button>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 bg-white p-5 pt-3 rounded-2xl border border-slate-200 shadow-sm">
         <div className="space-y-1.5">
           <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider ml-1">
             Search
           </label>
           <div className="relative">
-            <input
-              type="text"
+            <Search
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+              size={16}
+            />
+            <Input
               placeholder="Filter by name..."
-              className="w-full h-10 pl-3 pr-4 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all"
+              className="pl-9 h-10 bg-slate-50 border-slate-200 focus-visible:ring-primary/20 focus-visible:border-primary transition-all"
               value={searchQuery}
               onChange={(e) => updateFilters({ q: e.target.value })}
             />
           </div>
         </div>
+
         <div className="space-y-1.5">
           <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider ml-1">
             Doc Type
           </label>
-          <select
-            className="w-full h-10 px-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all cursor-pointer"
+          <Select
             value={selectedType}
-            onChange={(e) => updateFilters({ type: e.target.value })}
+            onValueChange={(val) => updateFilters({ type: val })}
           >
-            <option>All</option>
-            {docTypes.map((t) => (
-              <option key={t}>{t}</option>
-            ))}
-          </select>
+            <SelectTrigger className="h-10 w-full bg-slate-50 border-slate-200 focus:ring-primary/20">
+              <SelectValue placeholder="All" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="All">All Types</SelectItem>
+              {docTypes.map((t) => (
+                <SelectItem key={t} value={t}>
+                  {t}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
+
         <div className="space-y-1.5">
           <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider ml-1">
             Status
           </label>
-          <select
-            className="w-full h-10 px-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all cursor-pointer"
+          <Select
             value={selectedStatus}
-            onChange={(e) => updateFilters({ status: e.target.value })}
+            onValueChange={(val) => updateFilters({ status: val })}
           >
-            <option>All</option>
-            {statuses.map((s) => (
-              <option key={s}>{s}</option>
-            ))}
-          </select>
+            <SelectTrigger className="h-10 w-full bg-slate-50 border-slate-200 focus:ring-primary/20">
+              <SelectValue placeholder="All" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="All">All Statuses</SelectItem>
+              {statuses.map((s) => (
+                <SelectItem key={s} value={s}>
+                  {s}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
+
         <div className="space-y-1.5">
           <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider ml-1">
             Expiration
           </label>
-          <select
-            className="w-full h-10 px-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all cursor-pointer"
+          <Select
             value={selectedExpiry}
-            onChange={(e) => updateFilters({ expiry: e.target.value })}
+            onValueChange={(val) => updateFilters({ expiry: val })}
           >
-            <option>All</option>
-            <option>Expired</option>
-            <option>Expiring Soon</option>
-          </select>
+            <SelectTrigger className="h-10 w-full bg-slate-50 border-slate-200 focus:ring-primary/20">
+              <SelectValue placeholder="All" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="All">All Expiry</SelectItem>
+              <SelectItem value="Expired">Expired</SelectItem>
+              <SelectItem value="Expiring Soon">Expiring Soon</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 

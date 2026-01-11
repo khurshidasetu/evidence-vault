@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { Input } from "../ui/input";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -36,7 +37,7 @@ const NavItem: React.FC<NavItemProps> = ({ href, icon, label }) => {
       className={cn(
         "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group",
         isActive
-          ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200"
+          ? "bg-primary text-white shadow-lg shadow-primary/20"
           : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
       )}
     >
@@ -60,10 +61,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <aside className="hidden lg:flex w-72 bg-white border-r border-slate-200 flex-col z-30">
         <div className="p-8">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="bg-indigo-600 p-2 rounded-xl shadow-lg shadow-indigo-100 group-hover:rotate-6 transition-transform">
+            <div className="bg-primary p-2 rounded-xl shadow-lg shadow-primary/20 group-hover:rotate-6 transition-transform">
               <Shield className="text-white" size={24} />
             </div>
-            <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-indigo-700 to-indigo-500 bg-clip-text text-transparent">
+            <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
               SentryLink
             </span>
           </Link>
@@ -119,19 +120,19 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <button className="p-2 -ml-2 text-slate-500">
               <Menu size={24} />
             </button>
-            <Shield className="text-indigo-600" size={24} />
+            <Shield className="text-primary" size={24} />
           </div>
 
           <div className="flex-1 max-w-lg hidden md:block">
             <div className="relative group">
               <Search
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors"
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors"
                 size={18}
               />
-              <input
+              <Input
                 type="text"
                 placeholder="Search evidence, requests..."
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-100 border-none rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all outline-none"
+              className="pl-9 h-10 bg-slate-50 border-slate-200 focus-visible:ring-primary/20 focus-visible:border-primary transition-all"
               />
             </div>
           </div>
@@ -150,7 +151,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 <span className="text-[10px] text-slate-400">Owner</span>
               </div>
               <button className="flex items-center gap-2 p-1 rounded-xl hover:bg-slate-100 transition-all">
-                <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-100">
+                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white shadow-md shadow-primary/20">
                   <User size={18} />
                 </div>
               </button>

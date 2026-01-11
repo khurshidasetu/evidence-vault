@@ -1,6 +1,7 @@
 import React from "react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { Checkbox } from "@/components/ui/checkbox";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -42,11 +43,12 @@ export function Table<T>({
             <tr className="bg-slate-50/80 border-b border-slate-200">
               {(onSelectRow || onSelectAll) && (
                 <th className="px-6 py-4 w-10">
-                  <input
-                    type="checkbox"
-                    className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 transition-all cursor-pointer"
+                  <Checkbox
                     checked={isAllSelected}
-                    onChange={() => onSelectAll?.(isAllSelected ? [] : allIds)}
+                    onCheckedChange={() =>
+                      onSelectAll?.(isAllSelected ? [] : allIds)
+                    }
+                    aria-label="Select all"
                   />
                 </th>
               )}
@@ -81,23 +83,22 @@ export function Table<T>({
                 return (
                   <tr
                     key={id}
-                    onClick={() => onRowClick?.(item)}
                     className={cn(
                       "transition-colors duration-200 group relative",
                       onRowClick ? "cursor-pointer hover:bg-slate-50/50" : "",
-                      isSelected ? "bg-indigo-50/30" : ""
+                      isSelected ? "bg-primary/5" : ""
                     )}
+                    onClick={() => onRowClick?.(item)}
                   >
                     {(onSelectRow || onSelectAll) && (
                       <td
                         className="px-6 py-4"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <input
-                          type="checkbox"
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 transition-all cursor-pointer"
+                        <Checkbox
                           checked={isSelected}
-                          onChange={() => onSelectRow?.(id)}
+                          onCheckedChange={() => onSelectRow?.(id)}
+                          aria-label={`Select row ${id}`}
                         />
                       </td>
                     )}
