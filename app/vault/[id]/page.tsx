@@ -4,12 +4,12 @@ import { Evidence, EvidenceVersion, MOCK_EVIDENCE } from "@/lib/data";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import BusinessLicense from "@/components/evidence-vault/details-page/businessLicense";
-import DetailsHeader from "@/components/evidence-vault/details-page/detailsHeader";
-import Metadata from "@/components/evidence-vault/details-page/metadata";
-import Txs from "@/components/evidence-vault/details-page/txs";
-import UploadNewVersion from "@/components/evidence-vault/details-page/uploadnewversion";
-import VersionHistory from "@/components/evidence-vault/details-page/versionhistory";
+import BusinessLicense from "@/components/evidence-vault/details-page/BusinessLicense";
+import DetailsHeader from "@/components/evidence-vault/details-page/DetailsHeader";
+import Metadata from "@/components/evidence-vault/details-page/Metadata";
+import Txs from "@/components/evidence-vault/details-page/Txs";
+import UploadNewVersion from "@/components/evidence-vault/details-page/UploadNewVersion";
+import VersionHistory from "@/components/evidence-vault/details-page/VersionHistory";
 
 export default function EvidenceDetailPage() {
   const { id } = useParams();

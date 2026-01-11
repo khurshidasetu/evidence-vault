@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { BuyerRequest, MOCK_EVIDENCE } from "@/lib/data";
 import { StatusChip } from "@/components/ui/StatusChip";
-import SelectVaultTable from "./selectvaulttable";
+import SelectVaultTable from "./SelectVaultTable";
 
 interface FullfillRequestProps {
   isOpen: boolean;

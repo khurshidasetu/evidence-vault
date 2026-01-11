@@ -1,11 +1,10 @@
 "use client";
 
-import React from "react";
-import { Calendar, CheckCircle2 } from "lucide-react";
-import { TableRow, TableCell } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { StatusChip } from "@/components/ui/StatusChip";
+import { TableCell, TableRow } from "@/components/ui/table";
 import { BuyerRequest } from "@/lib/data";
+import { Calendar, CheckCircle2 } from "lucide-react";
 
 interface EachRowProps {
   request: BuyerRequest;

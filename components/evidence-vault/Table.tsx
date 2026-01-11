@@ -1,4 +1,5 @@
-import React from "react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { StatusChip } from "@/components/ui/StatusChip";
 import {
   Table,
   TableBody,
@@ -7,12 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Checkbox } from "@/components/ui/checkbox";
-import { StatusChip } from "@/components/ui/StatusChip";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 import { Evidence } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 interface VaultTableProps {
   data: Evidence[];

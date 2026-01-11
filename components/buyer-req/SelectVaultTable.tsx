@@ -1,13 +1,10 @@
-import React from "react";
+import { StatusChip } from "@/components/ui/StatusChip";
 import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+  TableRow
 } from "@/components/ui/table";
-import { StatusChip } from "@/components/ui/StatusChip";
 import { Evidence } from "@/lib/data";
 
 interface SelectVaultTableProps {

@@ -1,4 +1,3 @@
-import React from "react";
 import { FileText, ShieldCheck } from "lucide-react";
 
 export default function BusinessLicense() {

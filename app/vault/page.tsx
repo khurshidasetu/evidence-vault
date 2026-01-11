@@ -1,9 +1,8 @@
 "use client";
 
-import Filters from "@/components/evidence-vault/filters";
-import Header from "@/components/evidence-vault/header";
-import VaultTable from "@/components/evidence-vault/table";
-import { Button } from "@/components/ui/button";
+import Filters from "@/components/evidence-vault/Filters";
+import Header from "@/components/evidence-vault/Header";
+import VaultTable from "@/components/evidence-vault/Table";
 import { DocStatus, DocType, MOCK_EVIDENCE } from "@/lib/data";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useState } from "react";

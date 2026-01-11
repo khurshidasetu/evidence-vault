@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import { MOCK_REQUESTS, BuyerRequest } from "@/lib/data";
 
 // New Reorganized Imports
-import Header from "@/components/buyer-req/header";
-import RequestsTable from "@/components/buyer-req/table";
-import FullfillRequest from "@/components/buyer-req/fullfillrequest";
-import ProTip from "@/components/buyer-req/protip";
+import Header from "@/components/buyer-req/Header";
+import RequestsTable from "@/components/buyer-req/Table";
+import FullfillRequest from "@/components/buyer-req/FullfillRequest";
+import ProTip from "@/components/buyer-req/ProTip";
 
 export default function RequestsPage() {
   const [requests, setRequests] = useState<BuyerRequest[]>(MOCK_REQUESTS);

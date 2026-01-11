@@ -1,14 +1,12 @@
-import React from "react";
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from "@/components/ui/table";
 import { BuyerRequest } from "@/lib/data";
-import EachRow from "./eachrow";
+import EachRow from "./EachRow";
 
 interface RequestsTableProps {
   requests: BuyerRequest[];
